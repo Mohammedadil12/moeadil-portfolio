@@ -35,7 +35,7 @@ nav{position:fixed;inset:0 0 auto;z-index:99;height:52px;display:flex;align-item
 /* ── HERO ── */
 #hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:80px 24px 60px;position:relative;overflow:hidden;background:var(--bg)}
 .hero-bg-text{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:clamp(80px,28vw,220px);font-weight:800;letter-spacing:-6px;color:transparent;-webkit-text-stroke:1px rgba(0,0,0,0.05);white-space:nowrap;pointer-events:none;user-select:none;z-index:0;line-height:1}
-.hero-inner{position:relative;z-index:1;max-width:520px;margin:0 auto;width:100%;padding-top:52px}
+.hero-inner{position:relative;z-index:1;max-width:520px;margin:0 auto;width:100%;padding-top:0}
 .hero-img-container{width:80px;height:80px;border-radius:20px;overflow:hidden;margin-bottom:24px;border:0.5px solid rgba(0,0,0,0.08);box-shadow:var(--shadow);background:var(--bg2);display:flex;align-items:center;justify-content:center}
 .hero-img-container img{width:100%;height:100%;object-fit:cover;object-position:top;opacity:0;transition:opacity .8s ease}
 .hero-img-container img.loaded{opacity:1}
@@ -236,10 +236,6 @@ span[data-l].on{display:inline}
     <h2 class="fi"></h2>
     <div class="about-card fi delay-1">
       <div class="about-top">
-        <div class="about-avatar">
-          <img id="aboutImg" src="" alt="Mo" style="display:none"/>
-          <span id="aboutPh">👤</span>
-        </div>
         <div>
           <div class="about-name">Mohammed Adil</div>
           <div class="about-handle">@itsfalfoul</div>
