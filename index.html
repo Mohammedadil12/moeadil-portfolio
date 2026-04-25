@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>moeadil.com</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{--bg:#0a0a0a;--bg2:#111;--c1:#fff;--c2:#aaa;--c3:#444;--accent:#d4ff00;--r:16px}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--c1);line-height:1.6;overflow-x:hidden}
+
+/* GRAIN OVERLAY */
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.5}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 20px;height:52px;background:rgba(10,10,10,0.8);backdrop-filter:blur(20px);border-bottom:0.5px solid rgba(255,255,255,0.06)}
+.nav-logo{font-size:15px;font-weight:500;letter-spacing:0.5px;color:var(--accent)}
+.lang-switcher{display:flex;gap:4px}
+.lang-btn{font-size:11px;padding:4px 9px;border:0.5px solid var(--c3);border-radius:20px;background:transparent;cursor:pointer;color:var(--c2);transition:all .2s}
+.lang-btn.active{background:var(--accent);color:#000;border-color:var(--accent);font-weight:500}
+
+/* HERO */
+#hero{min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 20px 48px;position:relative;overflow:hidden}
+.hero-canvas{position:absolute;inset:0;z-index:0}
+.hero-content{position:relative;z-index:1;max-width:480px;margin:0 auto;width:100%}
+.hero-tag{display:inline-flex;align-items:center;gap:7px;font-size:11px;color:var(--c2);border:0.5px solid var(--c3);padding:5px 12px;border-radius:20px;margin-bottom:20px;letter-spacing:0.5px}
+.dot{width:6px;height:6px;border-radius:50%;background:#22c55e;flex-shrink:0;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(34,197,94,0.4)}50%{opacity:.6;box-shadow:0 0 0 6px rgba(34,197,94,0)}}
+h1{font-size:2.6rem;font-weight:500;letter-spacing:-1.5px;line-height:1.1;margin-bottom:16px}
+h1 .accent{color:var(--accent)}
+.hero-sub{font-size:14px;color:var(--c2);line-height:1.75;margin-bottom:28px;max-width:340px}
+.hero-btns{display:flex;gap:10px;flex-wrap:wrap}
+.btn-primary{padding:12px 24px;background:var(--accent);color:#000;border-radius:30px;text-decoration:none;font-size:13px;font-weight:600;letter-spacing:0.2px;transition:transform .15s,opacity .15s}
+.btn-primary:active{transform:scale(0.97)}
+.btn-ghost{padding:12px 24px;border:0.5px solid var(--c3);color:var(--c1);border-radius:30px;text-decoration:none;font-size:13px;transition:border-color .2s}
+.btn-ghost:hover{border-color:var(--c2)}
+.scroll-hint{position:absolute;bottom:20px;right:20px;z-index:1;display:flex;flex-direction:column;align-items:center;gap:4px;opacity:.3}
+.scroll-line{width:0.5px;height:40px;background:var(--c2);animation:scrolldown 1.5s ease-in-out infinite}
+@keyframes scrolldown{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* SECTIONS */
+.sec{padding:56px 20px;max-width:480px;margin:0 auto;position:relative;z-index:1}
+.sec-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:10px;opacity:.8}
+h2{font-size:1.4rem;font-weight:500;letter-spacing:-0.4px}
+.divider{height:0.5px;background:linear-gradient(90deg,rgba(255,255,255,0.08) 0%,rgba(255,255,255,0.02) 100%);margin:0 20px}
+
+/* ABOUT */
+.about-card{background:var(--bg2);border:0.5px solid rgba(255,255,255,0.07);border-radius:var(--r);padding:20px;margin-top:20px}
+.about-card p{font-size:14px;color:var(--c2);line-height:1.75}
+.skills{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+.sk{font-size:11px;padding:5px 12px;border:0.5px solid rgba(255,255,255,0.1);border-radius:20px;color:var(--c2);letter-spacing:0.2px;transition:border-color .2s,color .2s}
+.sk:hover{border-color:var(--accent);color:var(--accent)}
+
+/* PROJECTS */
+.proj-list{display:flex;flex-direction:column;gap:8px;margin-top:20px}
+.proj{background:var(--bg2);border:0.5px solid rgba(255,255,255,0.07);border-radius:var(--r);padding:16px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;transition:border-color .2s,transform .2s}
+.proj:hover{border-color:rgba(212,255,0,0.2);transform:translateX(3px)}
+.proj-info h3{font-size:14px;font-weight:500}
+.proj-info p{font-size:12px;color:var(--c3);margin-top:2px}
+.badge{font-size:10px;padding:3px 10px;border-radius:20px;white-space:nowrap;flex-shrink:0;font-weight:500;letter-spacing:0.3px}
+.b-live{background:rgba(34,197,94,0.12);color:#4ade80;border:0.5px solid rgba(34,197,94,0.2)}
+.b-prog{background:rgba(212,255,0,0.1);color:var(--accent);border:0.5px solid rgba(212,255,0,0.2)}
+.b-soon{background:rgba(251,191,36,0.1);color:#fbbf24;border:0.5px solid rgba(251,191,36,0.2)}
+.b-plan{background:rgba(167,139,250,0.1);color:#a78bfa;border:0.5px solid rgba(167,139,250,0.2)}
+
+/* CONTACT */
+.contact-links{display:flex;flex-direction:column;gap:8px;margin-top:20px}
+.cl{display:flex;align-items:center;justify-content:space-between;padding:16px 18px;border:0.5px solid rgba(255,255,255,0.07);border-radius:var(--r);text-decoration:none;color:var(--c1);font-size:14px;transition:border-color .2s,background .2s;position:relative;overflow:hidden}
+.cl::after{content:'→';position:absolute;right:18px;opacity:.3;font-size:13px}
+.cl:hover{border-color:rgba(212,255,0,0.3);background:rgba(212,255,0,0.03)}
+.cl-name{font-weight:500}
+.cl-handle{font-size:12px;color:var(--c3);margin-right:24px}
+
+/* FOOTER */
+footer{text-align:center;padding:24px 20px;font-size:11px;color:var(--c3);border-top:0.5px solid rgba(255,255,255,0.05);position:relative;z-index:1}
+
+/* RTL */
+body.rtl{direction:rtl}
+body.rtl .proj:hover{transform:translateX(-3px)}
+body.rtl .cl::after{right:auto;left:18px;content:'←'}
+
+/* ANIMATIONS */
+.fade-up{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+
+/* LANG */
+[data-lang]{display:none}
+[data-lang].on{display:block}
+span[data-lang].on{display:inline}
+.hero-tag [data-lang].on{display:inline}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">moeadil.com</div>
+  <div class="lang-switcher">
+    <button class="lang-btn active" onclick="setLang('de')">DE</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('ar')">AR</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <canvas class="hero-canvas" id="c"></canvas>
+  <div class="hero-content">
+    <div class="hero-tag">
+      <span class="dot"></span>
+      <span data-lang="de" class="on">Offen für Zusammenarbeit</span>
+      <span data-lang="en">Open to collaboration</span>
+      <span data-lang="ar">متاح للتعاون</span>
+    </div>
+    <h1>
+      <span data-lang="de" class="on">Content<br>Creator<br><span class="accent">&amp; Student.</span></span>
+      <span data-lang="en">Content<br>Creator<br><span class="accent">&amp; Student.</span></span>
+      <span data-lang="ar">صانع محتوى<br><span class="accent">وطالب.</span></span>
+    </h1>
+    <p class="hero-sub">
+      <span data-lang="de" class="on">Ich bin Mo — arabische Inhalte für Instagram &amp; TikTok. Ich baue mein Publikum auf, eine Sekunde nach der anderen.</span>
+      <span data-lang="en">I'm Mo — Arabic content for Instagram &amp; TikTok. Building my audience one second at a time.</span>
+      <span data-lang="ar">أنا مو — محتوى عربي على إنستغرام وتيك توك. أبني جمهوري لحظة بلحظة.</span>
+    </p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-primary">
+        <span data-lang="de" class="on">Kontakt aufnehmen</span>
+        <span data-lang="en">Get in touch</span>
+        <span data-lang="ar">تواصل معي</span>
+      </a>
+      <a href="#projects" class="btn-ghost">
+        <span data-lang="de" class="on">Projekte ansehen</span>
+        <span data-lang="en">See projects</span>
+        <span data-lang="ar">المشاريع</span>
+      </a>
+    </div>
+  </div>
+  <div class="scroll-hint"><div class="scroll-line"></div></div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<div class="sec fade-up" id="about">
+  <div class="sec-label">
+    <span data-lang="de" class="on">Über mich</span>
+    <span data-lang="en">About</span>
+    <span data-lang="ar">عن نفسي</span>
+  </div>
+  <h2>
+    <span data-lang="de" class="on">Student. Creator. Lernender.</span>
+    <span data-lang="en">Student. Creator. Learner.</span>
+    <span data-lang="ar">طالب. مبدع. متعلّم.</span>
+  </h2>
+  <div class="about-card">
+    <p>
+      <span data-lang="de" class="on">Ich lerne, ich wachse und ich teile es — authentisch, auf Arabisch und mit echtem Mehrwert. Video, Foto, Marketing — alles in Entwicklung.</span>
+      <span data-lang="en">I learn, I grow and I share it — authentically, in Arabic and with real value. Video, photo, marketing — all in development.</span>
+      <span data-lang="ar">أتعلّم، أنمو، وأشارك — بأسلوب أصيل وبقيمة حقيقية. فيديو، تصوير، تسويق — كل شيء في تطور.</span>
+    </p>
+    <div class="skills">
+      <span class="sk">Video Production</span>
+      <span class="sk">Video Editing</span>
+      <span class="sk">Fotografie</span>
+      <span class="sk">Instagram</span>
+      <span class="sk">TikTok</span>
+      <span class="sk">Storytelling</span>
+      <span class="sk">Online Marketing</span>
+      <span class="sk">Arabic Content</span>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- PROJECTS -->
+<div class="sec fade-up" id="projects">
+  <div class="sec-label">
+    <span data-lang="de" class="on">Projekte</span>
+    <span data-lang="en">Projects</span>
+    <span data-lang="ar">المشاريع</span>
+  </div>
+  <h2>
+    <span data-lang="de" class="on">Was ich gerade baue</span>
+    <span data-lang="en">What I'm building</span>
+    <span data-lang="ar">ما أبنيه الآن</span>
+  </h2>
+  <div class="proj-list">
+    <div class="proj">
+      <div class="proj-info">
+        <h3><span data-lang="de" class="on">Arabic Content Kanal</span><span data-lang="en">Arabic Content Channel</span><span data-lang="ar">قناة المحتوى العربي</span></h3>
+        <p>Instagram &amp; TikTok</p>
+      </div>
+      <span class="badge b-live">Live</span>
+    </div>
+    <div class="proj">
+      <div class="proj-info">
+        <h3><span data-lang="de" class="on">Personal Brand</span><span data-lang="en">Personal Brand</span><span data-lang="ar">العلامة الشخصية</span></h3>
+        <p>moeadil.com</p>
+      </div>
+      <span class="badge b-prog">In Progress</span>
+    </div>
+    <div class="proj">
+      <div class="proj-info">
+        <h3><span data-lang="de" class="on">Erste Brand Kooperation</span><span data-lang="en">First Brand Collab</span><span data-lang="ar">أول تعاون تجاري</span></h3>
+        <p><span data-lang="de" class="on">DE / Arabischer Markt</span><span data-lang="en">DE / Arabic market</span><span data-lang="ar">السوق الألماني والعربي</span></p>
+      </div>
+      <span class="badge b-soon">Coming Soon</span>
+    </div>
+    <div class="proj">
+      <div class="proj-info">
+        <h3><span data-lang="de" class="on">Video Serie für Creator</span><span data-lang="en">Video Series for Creators</span><span data-lang="ar">سلسلة فيديو لصنّاع المحتوى</span></h3>
+        <p><span data-lang="de" class="on">Arabisch</span><span data-lang="en">In Arabic</span><span data-lang="ar">بالعربية</span></p>
+      </div>
+      <span class="badge b-plan">Geplant</span>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<div class="sec fade-up" id="contact">
+  <div class="sec-label">Kontakt</div>
+  <h2>
+    <span data-lang="de" class="on">Schreib mir</span>
+    <span data-lang="en">Reach out</span>
+    <span data-lang="ar">تواصل معي</span>
+  </h2>
+  <div class="contact-links">
+    <a href="https://instagram.com/moeadil" class="cl">
+      <span class="cl-name">Instagram</span><span class="cl-handle">@moeadil</span>
+    </a>
+    <a href="https://tiktok.com/@moeadil" class="cl">
+      <span class="cl-name">TikTok</span><span class="cl-handle">@moeadil</span>
+    </a>
+    <a href="mailto:mo@moeadil.com" class="cl">
+      <span class="cl-name">E-Mail</span><span class="cl-handle">mo@moeadil.com</span>
+    </a>
+  </div>
+</div>
+
+<footer>moeadil.com © 2026</footer>
+
+<script>
+/* ---- CANVAS PARTICLE ---- */
+const canvas=document.getElementById('c');
+const ctx=canvas.getContext('2d');
+let W,H,pts=[];
+function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight}
+resize();window.addEventListener('resize',()=>{resize();init()});
+function init(){
+  pts=[];
+  const n=Math.floor(W*H/14000);
+  for(let i=0;i<n;i++){
+    pts.push({
+      x:Math.random()*W,y:Math.random()*H,
+      vx:(Math.random()-.5)*.25,vy:(Math.random()-.5)*.25,
+      r:Math.random()*1.2+.3,
+      a:Math.random()
+    })
+  }
+}
+init();
+let mx=-999,my=-999;
+window.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
+window.addEventListener('touchmove',e=>{mx=e.touches[0].clientX;my=e.touches[0].clientY},{passive:true});
+
+function draw(){
+  ctx.clearRect(0,0,W,H);
+  pts.forEach(p=>{
+    p.x+=p.vx;p.y+=p.vy;
+    if(p.x<0)p.x=W;if(p.x>W)p.x=0;
+    if(p.y<0)p.y=H;if(p.y>H)p.y=0;
+    const dx=p.x-mx,dy=p.y-my,dist=Math.sqrt(dx*dx+dy*dy);
+    const glow=dist<120?1-(dist/120):0;
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.r+(glow*2),0,Math.PI*2);
+    ctx.fillStyle=`rgba(212,255,0,${0.12+glow*0.5})`;
+    ctx.fill();
+  });
+  // lines between close pts
+  for(let i=0;i<pts.length;i++){
+    for(let j=i+1;j<pts.length;j++){
+      const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y;
+      const d=Math.sqrt(dx*dx+dy*dy);
+      if(d<90){
+        ctx.beginPath();
+        ctx.moveTo(pts[i].x,pts[i].y);
+        ctx.lineTo(pts[j].x,pts[j].y);
+        ctx.strokeStyle=`rgba(212,255,0,${(1-d/90)*0.08})`;
+        ctx.lineWidth=.5;
+        ctx.stroke();
+      }
+    }
+  }
+  requestAnimationFrame(draw);
+}
+draw();
+
+/* ---- SCROLL FADE ---- */
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})
+},{threshold:.15});
+document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
+
+/* ---- LANG ---- */
+function setLang(l){
+  document.querySelectorAll('[data-lang]').forEach(el=>{
+    el.classList.toggle('on',el.dataset.lang===l)
+  });
+  document.querySelectorAll('.lang-btn').forEach(b=>{
+    b.classList.toggle('active',b.textContent===l.toUpperCase())
+  });
+  document.body.classList.toggle('rtl',l==='ar');
+}
+</script>
+</body>
+</html>
