@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>moeadil.com</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{--c1:#111;--c2:#555;--c3:#aaa;--c4:#f7f7f5;--r:14px}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#fff;color:var(--c1);line-height:1.6;font-size:15px}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:99;background:rgba(255,255,255,0.94);backdrop-filter:blur(14px);border-bottom:0.5px solid #ebebeb;display:flex;align-items:center;justify-content:space-between;padding:0 20px;height:52px}
+.nav-logo{font-size:16px;font-weight:500;letter-spacing:-0.3px}
+.lang-switcher{display:flex;gap:4px}
+.lang-btn{font-size:11px;padding:4px 9px;border:0.5px solid #ddd;border-radius:20px;background:transparent;cursor:pointer;color:var(--c2)}
+.lang-btn.active{background:var(--c1);color:#fff;border-color:var(--c1)}
+
+/* LAYOUT */
+.wrap{padding:0 20px;max-width:480px;margin:0 auto}
+
+/* HERO */
+#hero{padding:56px 20px 48px;max-width:480px;margin:0 auto}
+.hero-tag{display:inline-flex;align-items:center;gap:7px;font-size:12px;color:var(--c2);background:var(--c4);padding:5px 12px;border-radius:20px;margin-bottom:20px}
+.dot{width:6px;height:6px;border-radius:50%;background:#22c55e;flex-shrink:0;animation:p 2s infinite}
+@keyframes p{0%,100%{opacity:1}50%{opacity:.3}}
+h1{font-size:2rem;font-weight:500;letter-spacing:-0.8px;line-height:1.2}
+.hero-sub{font-size:14px;color:var(--c2);margin-top:12px;line-height:1.7}
+.hero-cta{display:inline-block;margin-top:24px;padding:11px 24px;background:var(--c1);color:#fff;border-radius:30px;text-decoration:none;font-size:13px;font-weight:500}
+
+/* SECTION */
+.sec{padding:40px 20px;max-width:480px;margin:0 auto;border-top:0.5px solid #ebebeb}
+.sec-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--c3);margin-bottom:8px}
+h2{font-size:1.25rem;font-weight:500;letter-spacing:-0.3px}
+.sec p{font-size:14px;color:var(--c2);margin-top:8px;line-height:1.7}
+
+/* SKILLS */
+.skills{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.sk{font-size:12px;padding:5px 11px;border:0.5px solid #ddd;border-radius:20px;color:var(--c2)}
+
+/* PROJECTS */
+.proj-list{display:flex;flex-direction:column;gap:10px;margin-top:16px}
+.proj{background:var(--c4);border-radius:var(--r);padding:14px 16px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.proj h3{font-size:14px;font-weight:500}
+.proj p{font-size:12px;color:var(--c3);margin-top:3px}
+.badge{font-size:10px;padding:3px 9px;border-radius:20px;white-space:nowrap;flex-shrink:0;font-weight:500;margin-top:2px}
+.b-active{background:#dcfce7;color:#15803d}
+.b-soon{background:#fef3c7;color:#92400e}
+.b-plan{background:#ede9fe;color:#5b21b6}
+
+/* CONTACT */
+.contact-links{display:flex;flex-direction:column;gap:8px;margin-top:16px}
+.cl{display:flex;align-items:center;justify-content:space-between;padding:13px 16px;border:0.5px solid #e5e5e5;border-radius:var(--r);text-decoration:none;color:var(--c1);font-size:14px}
+.cl span{font-size:12px;color:var(--c3)}
+
+/* FOOTER */
+footer{text-align:center;padding:28px 20px;font-size:11px;color:var(--c3);border-top:0.5px solid #ebebeb}
+
+/* RTL */
+body.rtl{direction:rtl}
+body.rtl .proj{flex-direction:row-reverse}
+body.rtl .cl{flex-direction:row-reverse}
+
+/* LANG */
+[data-lang]{display:none}
+[data-lang].on{display:block}
+span[data-lang].on{display:inline}
+.hero-tag [data-lang].on{display:inline}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">moeadil.com</div>
+  <div class="lang-switcher">
+    <button class="lang-btn active" onclick="setLang('de')">DE</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('ar')">AR</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div id="hero">
+  <div class="hero-tag">
+    <span class="dot"></span>
+    <span data-lang="de" class="on">Offen für Zusammenarbeit</span>
+    <span data-lang="en">Open to collaboration</span>
+    <span data-lang="ar">متاح للتعاون</span>
+  </div>
+  <h1>
+    <span data-lang="de" class="on">Content Creator &amp; Student.</span>
+    <span data-lang="en">Content Creator &amp; Student.</span>
+    <span data-lang="ar">صانع محتوى وطالب.</span>
+  </h1>
+  <p class="hero-sub">
+    <span data-lang="de" class="on">Ich bin Mo — ich erschaffe arabische Inhalte für Instagram &amp; TikTok und baue mein Publikum auf.</span>
+    <span data-lang="en">I'm Mo — creating Arabic content for Instagram &amp; TikTok while building my audience.</span>
+    <span data-lang="ar">أنا مو — أصنع محتوى عربياً على إنستغرام وتيك توك وأبني جمهوري.</span>
+  </p>
+  <a href="#contact" class="hero-cta">
+    <span data-lang="de" class="on">Kontakt</span>
+    <span data-lang="en">Get in touch</span>
+    <span data-lang="ar">تواصل معي</span>
+  </a>
+</div>
+
+<!-- ABOUT -->
+<div class="sec" id="about">
+  <div class="sec-label">
+    <span data-lang="de" class="on">Über mich</span>
+    <span data-lang="en">About</span>
+    <span data-lang="ar">عن نفسي</span>
+  </div>
+  <h2>
+    <span data-lang="de" class="on">Student. Creator. Lernender.</span>
+    <span data-lang="en">Student. Creator. Learner.</span>
+    <span data-lang="ar">طالب. مبدع. متعلّم.</span>
+  </h2>
+  <p>
+    <span data-lang="de" class="on">Ich lerne, ich wachse und ich teile es — authentisch, auf Arabisch und mit echtem Mehrwert.</span>
+    <span data-lang="en">I learn, I grow and I share it — authentically, in Arabic and with real value.</span>
+    <span data-lang="ar">أتعلّم، أنمو، وأشارك ذلك — بأسلوب أصيل وبقيمة حقيقية.</span>
+  </p>
+  <div class="skills">
+    <span class="sk">Video Production</span>
+    <span class="sk">Video Editing</span>
+    <span class="sk">Fotografie</span>
+    <span class="sk">Instagram</span>
+    <span class="sk">TikTok</span>
+    <span class="sk">Storytelling</span>
+    <span class="sk">Online Marketing</span>
+  </div>
+</div>
+
+<!-- PROJECTS -->
+<div class="sec" id="projects">
+  <div class="sec-label">
+    <span data-lang="de" class="on">Projekte</span>
+    <span data-lang="en">Projects</span>
+    <span data-lang="ar">المشاريع</span>
+  </div>
+  <h2>
+    <span data-lang="de" class="on">Was ich gerade baue</span>
+    <span data-lang="en">What I'm building</span>
+    <span data-lang="ar">ما أبنيه الآن</span>
+  </h2>
+  <div class="proj-list">
+    <div class="proj">
+      <div>
+        <h3>
+          <span data-lang="de" class="on">Arabic Content Kanal</span>
+          <span data-lang="en">Arabic Content Channel</span>
+          <span data-lang="ar">قناة المحتوى العربي</span>
+        </h3>
+        <p>Instagram &amp; TikTok</p>
+      </div>
+      <span class="badge b-active">Live</span>
+    </div>
+    <div class="proj">
+      <div>
+        <h3>
+          <span data-lang="de" class="on">Personal Brand aufbauen</span>
+          <span data-lang="en">Personal Brand</span>
+          <span data-lang="ar">العلامة الشخصية</span>
+        </h3>
+        <p>moeadil.com</p>
+      </div>
+      <span class="badge b-active">In Progress</span>
+    </div>
+    <div class="proj">
+      <div>
+        <h3>
+          <span data-lang="de" class="on">Erste Brand Kooperation</span>
+          <span data-lang="en">First Brand Collab</span>
+          <span data-lang="ar">أول تعاون تجاري</span>
+        </h3>
+        <p>
+          <span data-lang="de" class="on">DE / Arabischer Markt</span>
+          <span data-lang="en">DE / Arabic market</span>
+          <span data-lang="ar">السوق الألماني والعربي</span>
+        </p>
+      </div>
+      <span class="badge b-soon">Coming Soon</span>
+    </div>
+    <div class="proj">
+      <div>
+        <h3>
+          <span data-lang="de" class="on">Video Kurs / Serie</span>
+          <span data-lang="en">Video Course / Series</span>
+          <span data-lang="ar">دورة أو سلسلة فيديو</span>
+        </h3>
+        <p>
+          <span data-lang="de" class="on">Arabisch, für Creator</span>
+          <span data-lang="en">Arabic, for creators</span>
+          <span data-lang="ar">بالعربية، لصنّاع المحتوى</span>
+        </p>
+      </div>
+      <span class="badge b-plan">Geplant</span>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="sec" id="contact">
+  <div class="sec-label">Kontakt</div>
+  <h2>
+    <span data-lang="de" class="on">Schreib mir</span>
+    <span data-lang="en">Reach out</span>
+    <span data-lang="ar">تواصل معي</span>
+  </h2>
+  <div class="contact-links">
+    <a href="https://instagram.com/moeadil" class="cl">
+      <span>Instagram</span><span>@moeadil</span>
+    </a>
+    <a href="https://tiktok.com/@moeadil" class="cl">
+      <span>TikTok</span><span>@moeadil</span>
+    </a>
+    <a href="mailto:mo@moeadil.com" class="cl">
+      <span>E-Mail</span><span>mo@moeadil.com</span>
+    </a>
+  </div>
+</div>
+
+<footer>moeadil.com © 2026</footer>
+
+<script>
+function setLang(l){
+  document.querySelectorAll('[data-lang]').forEach(el=>{
+    el.classList.toggle('on',el.dataset.lang===l)
+  })
+  document.querySelectorAll('.lang-btn').forEach(b=>{
+    b.classList.toggle('active',b.textContent===l.toUpperCase())
+  })
+  document.body.classList.toggle('rtl',l==='ar')
+}
+</script>
+</body>
+</html>
